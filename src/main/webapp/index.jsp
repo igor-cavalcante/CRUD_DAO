@@ -5,12 +5,17 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
 </h1>
 <br/>
 
-<a href="/Cadastrar"></a>
+<h1>Form de cadastro de produtos </h1>
 
+<form action="inserirProduto" method="post">
+    <label>Nome: <input type="text" name="nome"/></label>
+    <label>descrição: <input type="text" name="descricao"/></label>
+    <label>Valor <input type="number" name="valor" /></label>
+    <input type="submit" value="Enviar"/>
+</form>
 
 </body>
 </html>

@@ -14,6 +14,6 @@ public class CadastrarProdutos extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/CadastrarProdutos.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Produtos.jsp").forward(request, response);
     }
 }

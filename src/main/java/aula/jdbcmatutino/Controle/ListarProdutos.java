@@ -1,6 +1,5 @@
 package aula.jdbcmatutino.Controle;
 
-
 import aula.jdbcmatutino.Dao.ErroDao;
 import aula.jdbcmatutino.Dao.ProdutoDaoClasse;
 import aula.jdbcmatutino.Dao.ProdutoDaoInterface;
@@ -12,22 +11,29 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
-@WebServlet("/inserir")
-public class inserir extends HttpServlet {
+@WebServlet("/Produtos")
+public class ListarProdutos extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        Produto produto = new Produto("teste", "testedescricao", 30.0f);
         try {
             ProdutoDaoInterface dao = new ProdutoDaoClasse();
-            dao.insert(produto);
-            dao.sair();
+            List<Produto> produtos = dao.buscar();
+            request.setAttribute("Produtos",produtos);
         } catch (ErroDao e) {
             throw new RuntimeException(e);
         }
 
+
+        // Obtém o parâmetro "mensagem" da requisição
+        String mensagem = request.getParameter("mensagem");
+        // Define o atributo "Mensagem" na requisição para ser utilizado na JSP
+        request.setAttribute("Mensagem", mensagem);
+        // Despacha para a JSP
+        request.getRequestDispatcher("/WEB-INF/Produtos.jsp").forward(request, response);
 
     }
 }
