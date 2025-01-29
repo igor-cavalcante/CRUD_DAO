@@ -28,7 +28,11 @@ public class inserirProduto extends HttpServlet {
                 ProdutoDaoInterface dao = new ProdutoDaoClasse();
                 dao.insert(produto);
                 dao.sair();
-                response.sendRedirect("Produtos?mensagem= Produto Cadastrado com sucesso");
+                String mensagem = "Produto cadastrado com sucesso!";
+                // Define o atributo "Mensagem" na requisição para ser utilizado na JSP
+                request.setAttribute("Mensagem", mensagem);
+                // Despacha para a JSP
+                request.getRequestDispatcher("/WEB-INF/Produtos.jsp").forward(request, response);
             } catch (NumberFormatException e) {
                 System.out.println("Erro : o valor informado deve ser um numero valido"+e);;
                 response.sendRedirect("Produtos?mensagem= erro ao tentar inserir");

@@ -1,18 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Igorc
-  Date: 28/01/2025
-  Time: 12:39
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <html>
 <head>
-    <title>Mensagem Temporária</title>
-
+    <title>Produtos</title>
     <style>
         .mensagem {
             color: darkgreen;
@@ -49,11 +40,29 @@
 
 <table border="1">
     <thead>
-    <td>nome</td>
-    <td>descrição</td>
-    <td>Valor</td>
+    <tr>
+        <td>nome</td>
+        <td>descrição</td>
+        <td>Valor</td>
+    </tr>
     </thead>
+
+    <tbody>
+    <c:forEach var="produto" items="${Produtos}">
+        <tr>
+            <td><c:out value="${produto.nome}" /></td>
+            <td><c:out value="${produto.descricao}"/></td>
+            <td><c:out value="${produto.preco}" /></td>
+        </tr>
+    </c:forEach>
+
+    </tbody>
+
+
 </table>
+
+
+
 
 </body>
 </html>

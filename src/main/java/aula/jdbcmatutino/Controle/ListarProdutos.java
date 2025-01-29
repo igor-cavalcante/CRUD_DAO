@@ -4,6 +4,7 @@ import aula.jdbcmatutino.Dao.ErroDao;
 import aula.jdbcmatutino.Dao.ProdutoDaoClasse;
 import aula.jdbcmatutino.Dao.ProdutoDaoInterface;
 import aula.jdbcmatutino.Modelo.Produto;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,8 +27,6 @@ public class ListarProdutos extends HttpServlet {
         } catch (ErroDao e) {
             throw new RuntimeException(e);
         }
-
-
         // Obtém o parâmetro "mensagem" da requisição
         String mensagem = request.getParameter("mensagem");
         // Define o atributo "Mensagem" na requisição para ser utilizado na JSP
