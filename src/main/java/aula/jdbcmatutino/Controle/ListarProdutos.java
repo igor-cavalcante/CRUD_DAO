@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,10 +28,19 @@ public class ListarProdutos extends HttpServlet {
         } catch (ErroDao e) {
             throw new RuntimeException(e);
         }
-        // Obtém o parâmetro "mensagem" da requisição
-        String mensagem = request.getParameter("mensagem");
-        // Define o atributo "Mensagem" na requisição para ser utilizado na JSP
-        request.setAttribute("Mensagem", mensagem);
+
+        // Obtém a mensagem da sessão, se existir
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            String mensagem = (String) session.getAttribute("Mensagem");
+            if (mensagem != null) {
+                // Define a mensagem como atributo da requisição
+                request.setAttribute("Mensagem", mensagem);
+                // Remove a mensagem da sessão para evitar exibição repetida
+                session.removeAttribute("Mensagem");
+            }
+        }
+
         // Despacha para a JSP
         request.getRequestDispatcher("/WEB-INF/Produtos.jsp").forward(request, response);
 

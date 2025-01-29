@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Cadastrar produto</title>
 </head>
 <body>
 </h1>

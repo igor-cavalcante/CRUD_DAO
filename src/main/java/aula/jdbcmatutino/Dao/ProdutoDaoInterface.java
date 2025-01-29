@@ -12,6 +12,6 @@ public interface ProdutoDaoInterface {
     public List<Produto> buscar() throws ErroDao;
     public void deleta(int codigo) throws ErroDao;
     public void sair() throws ErroDao;
-
+    public void editar(Produto produto, int codigo) throws ErroDao;
 
 }

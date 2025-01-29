@@ -32,13 +32,52 @@ public class ProdutoDaoClasse implements ProdutoDaoInterface{
 
             psmt.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ErroDao(e);
         }
     }
 
     @Override
     public Produto buscar(int codigo) throws ErroDao {
-            return null;
+            Produto p = new Produto();
+       try {
+           PreparedStatement psmt = conn.prepareStatement("Select * from produto where id = ?");
+           psmt.setInt(1,codigo);
+           ResultSet rs = psmt.executeQuery();
+
+           if(rs.next()){
+           p.setId(rs.getInt("id"));
+           p.setNome(rs.getString("nome"));
+           p.setDescricao(rs.getString("descricao"));
+           p.setPreco(rs.getFloat("valor"));
+           }
+
+           rs.close();
+           psmt.close();
+
+       } catch (SQLException e) {
+           throw new ErroDao(e);
+       }
+
+       return p;
+    }
+
+    @Override
+    public void editar(Produto produto , int codigo) throws ErroDao {
+
+        PreparedStatement psmt = null;
+
+        try {
+            psmt = conn.prepareStatement("update produto set nome = ?, descricao = ? , valor = ? where id = ?");
+            psmt.setString(1, produto.getNome());
+            psmt.setString(2, produto.getDescricao());
+            psmt.setFloat(3, produto.getPreco());
+            psmt.setInt(4, codigo);
+            psmt.executeUpdate();
+            psmt.close();
+
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
     }
 
     @Override
@@ -70,6 +109,15 @@ public class ProdutoDaoClasse implements ProdutoDaoInterface{
     @Override
     public void deleta(int codigo) throws ErroDao {
 
+       try {
+           PreparedStatement psmt = conn.prepareStatement("delete from produto where id = ?");
+           psmt.setInt(1, codigo);
+           psmt.executeUpdate();
+
+           psmt.close();
+       }catch (SQLException e ){
+           throw new ErroDao(e);
+       }
     }
 
     @Override

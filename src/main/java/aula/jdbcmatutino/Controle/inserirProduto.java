@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -28,11 +29,12 @@ public class inserirProduto extends HttpServlet {
                 ProdutoDaoInterface dao = new ProdutoDaoClasse();
                 dao.insert(produto);
                 dao.sair();
-                String mensagem = "Produto cadastrado com sucesso!";
-                // Define o atributo "Mensagem" na requisição para ser utilizado na JSP
-                request.setAttribute("Mensagem", mensagem);
-                // Despacha para a JSP
-                request.getRequestDispatcher("/WEB-INF/Produtos.jsp").forward(request, response);
+
+
+                HttpSession session = request.getSession();
+                session.setAttribute("Mensagem", "Produto cadastrado com sucesso!");
+                response.sendRedirect("Produtos");
+
             } catch (NumberFormatException e) {
                 System.out.println("Erro : o valor informado deve ser um numero valido"+e);;
                 response.sendRedirect("Produtos?mensagem= erro ao tentar inserir");

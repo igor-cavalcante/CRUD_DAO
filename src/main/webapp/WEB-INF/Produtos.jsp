@@ -13,6 +13,22 @@
             border-radius: 5px;
             margin-bottom: 10px;
         }
+
+        /* Estilo para o body (sem centralizar verticalmente) */
+        body {
+            margin: 0; /* Remove margens padrão */
+            padding-top: 20px; /* Dê algum espaço para a mensagem no topo */
+        }
+
+        /* Estilo para o contêiner da tabela */
+        .table-produtos {
+            display: flex;
+            justify-content: center; /* Centraliza horizontalmente */
+            padding: 20px;
+            text-align: center;
+        }
+
+
     </style>
 
     <script>
@@ -37,8 +53,9 @@
     </div>
 </c:if>
 
+<div class="table-produtos">
 
-<table border="1">
+<table  border="1">
     <thead>
     <tr>
         <td>nome</td>
@@ -53,6 +70,8 @@
             <td><c:out value="${produto.nome}" /></td>
             <td><c:out value="${produto.descricao}"/></td>
             <td><c:out value="${produto.preco}" /></td>
+            <td><a href="deletarProduto?id=${produto.id}">Deletar</a></td>
+            <td><a href="editarProduto?id=${produto.id}">Editar</a></td>
         </tr>
     </c:forEach>
 
@@ -60,9 +79,7 @@
 
 
 </table>
-
-
-
+</div>
 
 </body>
 </html>
