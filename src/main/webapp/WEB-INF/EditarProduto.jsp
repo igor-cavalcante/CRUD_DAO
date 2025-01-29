@@ -14,6 +14,9 @@
 </head>
 <body>
 
+<%@ include file="../header.jsp" %>
+
+<main>
 <h1>Form de Edição de produtos </h1>
 
 <form action="editarProduto" method="post">
@@ -24,5 +27,6 @@
     <input type="submit" value="Enviar"/>
 
 </form>
+</main>
 </body>
 </html>

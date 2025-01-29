@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -27,6 +28,9 @@ public class DeletarProduto extends HttpServlet {
                     ProdutoDaoInterface dao = new ProdutoDaoClasse();
                     dao.deleta(id);
                     dao.sair();
+
+                    HttpSession session = request.getSession();
+                    session.setAttribute("Mensagem", "Produto deletado com sucesso!");
 
                     response.sendRedirect("Produtos");
                 } catch (ErroDao e) {

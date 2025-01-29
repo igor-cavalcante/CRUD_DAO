@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +8,9 @@
 </h1>
 <br/>
 
+<%@ include file="header.jsp"%>
+
+<main>
 <h1>Form de cadastro de produtos </h1>
 
 <form action="inserirProduto" method="post">
@@ -16,6 +19,6 @@
     <label>Valor <input type="number" name="valor" /></label>
     <input type="submit" value="Enviar"/>
 </form>
-
+</main>
 </body>
 </html>

@@ -32,6 +32,7 @@ public class EditarProdutos extends HttpServlet {
                     dao.sair();
                     request.setAttribute("Produto", p);
 
+
                     // Despacha para a JSP
                     request.getRequestDispatcher("/WEB-INF/EditarProduto.jsp").forward(request, response);
                 } catch (ErroDao e) {
@@ -59,7 +60,6 @@ public class EditarProdutos extends HttpServlet {
             return;
         }
 
-
         if (nome !=null && !nome.isBlank() && descricao != null && !descricao.isBlank() && valor !=null && !valor.isBlank()){
             try {
                 int id = Integer.parseInt(sid);
@@ -77,7 +77,7 @@ public class EditarProdutos extends HttpServlet {
                 dao.sair();
 
                 HttpSession session = request.getSession();
-                session.setAttribute("Mensagem", "Produto"+produto.getNome()+" Editado com sucesso!");
+                session.setAttribute("Mensagem", "Produto "+produto.getNome()+" Editado com sucesso!");
                 response.sendRedirect("Produtos");
 
             } catch (NumberFormatException e) {
