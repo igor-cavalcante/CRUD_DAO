@@ -123,19 +123,35 @@
         a:hover {
             text-decoration: underline;
         }
+
+        .false{
+            color: rgba(0, 0, 0, 0.87);
+            background-color: rgba(136, 24, 24, 0.45);
+            border: 1px solid black;
+        }
     </style>
 
     <script>
-        window.onload = function() {
-            // Verifica se existe uma mensagem para exibir
+        document.addEventListener("DOMContentLoaded", function () {
             var mensagemDiv = document.getElementById("mensagem");
             if (mensagemDiv) {
+                // Obtém o valor de Sucess vindo do servidor
+                var isSucess = '<c:out value="${sessionScope.Sucess}" default="true" />';
+
+                // Lógica para alterar a classe com base no Sucess
+                if (isSucess === 'false') {
+                    mensagemDiv.classList.add("false");
+                } else {
+                    mensagemDiv.classList.remove("false"); // Garante que a classe não esteja presente
+                }
+
                 // Esconde a mensagem após 5 segundos
-                setTimeout(function() {
+                setTimeout(function () {
                     mensagemDiv.style.display = 'none';
                 }, 5000);
             }
-        };
+        });
+
     </script>
 </head>
 <body>
@@ -145,12 +161,15 @@
 
 <main>
 
+
     <!-- Exibindo a mensagem de feedback -->
     <c:if test="${not empty Mensagem}">
         <div id="mensagem" class="mensagem">
             <c:out value="${Mensagem}" />
         </div>
     </c:if>
+
+
 
 
     <div class="form-pesquisar">

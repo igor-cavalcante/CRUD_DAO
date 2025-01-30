@@ -7,7 +7,7 @@
     <groupId>aula</groupId>
     <artifactId>CRUD_DAO</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>JdbcMatutino</name>
+    <name>CRUD_DAO</name>
     <packaging>war</packaging>
 
     <properties>

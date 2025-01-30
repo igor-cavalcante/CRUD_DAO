@@ -32,6 +32,7 @@ public class inserirProduto extends HttpServlet {
 
 
                 HttpSession session = request.getSession();
+                session.setAttribute("Sucess", true); // Define como true ao cadastrar com sucesso
                 session.setAttribute("Mensagem", "Produto cadastrado com sucesso!");
                 response.sendRedirect("Produtos");
 

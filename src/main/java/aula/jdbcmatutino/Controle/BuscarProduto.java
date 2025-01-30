@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,16 +29,29 @@ public class BuscarProduto extends HttpServlet {
                     ProdutoDaoInterface dao = new ProdutoDaoClasse();
                     List<Produto> p = dao.buscar(nome);
                     dao.sair();
-                    request.setAttribute("Produtos", p);
-                    // Despacha para a JSP
-                    request.getRequestDispatcher("WEB-INF/Produtos.jsp").forward(request, response);
+
+                    if (p == null || p.isEmpty()) {
+                        // Configura mensagem de produto não encontrado
+                        HttpSession session = request.getSession();
+                        session.setAttribute("Sucess", "false");
+                        session.setAttribute("Mensagem", "Nenhum produto encontrado com o nome especificado.");
+                        response.sendRedirect("Produtos");
+                    } else {
+                        // Configura a lista de produtos para exibição
+                        request.setAttribute("Produtos", p);
+                        request.getRequestDispatcher("WEB-INF/Produtos.jsp").forward(request, response);
+                    }
+
                 } catch (ErroDao e) {
                     throw new RuntimeException(e);
                 }
         } else {
-            request.setAttribute("Mensagem", "error ao pesquisar");
-            // Despacha para a JSP
-            request.getRequestDispatcher("/WEB-INF/Produtos.jsp").forward(request, response);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("Sucess", "false");
+            session.setAttribute("Mensagem", "Produto não encontrado!");
+            response.sendRedirect("Produtos");
+
         }
 
     }
