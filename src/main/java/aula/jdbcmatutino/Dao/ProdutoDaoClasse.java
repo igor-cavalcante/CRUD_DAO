@@ -37,6 +37,33 @@ public class ProdutoDaoClasse implements ProdutoDaoInterface{
     }
 
     @Override
+    public List<Produto> buscar(String nome) throws ErroDao {
+
+       List<Produto> produtos = new ArrayList<>();
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement("Select * from produto where nome like ?");
+            psmt.setString(1, "%" + nome + "%"); // Usa "%" para permitir pesquisa parcial
+            ResultSet rs=psmt.executeQuery();
+
+            while (rs.next()) {
+                Produto p = new Produto();
+            p.setId(rs.getInt("id"));
+            p.setNome(rs.getString("nome"));
+            p.setDescricao(rs.getString("descricao"));
+            p.setPreco(rs.getFloat("valor"));
+
+            produtos.add(p);
+            }
+            rs.close();
+            psmt.close();
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
+        return produtos;
+    }
+
+    @Override
     public Produto buscar(int codigo) throws ErroDao {
             Produto p = new Produto();
        try {

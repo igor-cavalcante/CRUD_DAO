@@ -6,6 +6,7 @@
 
 <html>
 <head>
+    <script src="https://kit.fontawesome.com/aa0a6797c8.js" crossorigin="anonymous"></script>
     <style>
         /* Estilo global */
         * {

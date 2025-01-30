@@ -21,6 +21,8 @@ public class ListarProdutos extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
         try {
             ProdutoDaoInterface dao = new ProdutoDaoClasse();
             List<Produto> produtos = dao.buscar();

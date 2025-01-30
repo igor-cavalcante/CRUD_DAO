@@ -33,6 +33,65 @@
             justify-content: center;
         }
 
+
+        .form-pesquisar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%; /* Responsivo */
+            max-width: 400px; /* Limite para telas grandes */
+        }
+
+        .form-pesquisar h2 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .pesquisar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            width: 100%; /* Para se adaptar ao container */
+        }
+
+        .pesquisar input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .pesquisar button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pesquisar button:hover {
+            background-color: #0056b3;
+        }
+
+        .pesquisar button i {
+            margin-right: 5px;
+        }
+
+
         /* Estilo para a tabela */
         table {
             border-collapse: collapse;
@@ -86,13 +145,31 @@
 
 <main>
 
-
     <!-- Exibindo a mensagem de feedback -->
     <c:if test="${not empty Mensagem}">
         <div id="mensagem" class="mensagem">
             <c:out value="${Mensagem}" />
         </div>
     </c:if>
+
+
+    <div class="form-pesquisar">
+        <h2>Pesquisar Produto</h2>
+        <form action="buscarProduto" method="GET" >
+            <div class="pesquisar">
+                <input
+                        type="text"
+                        name="nome"
+                        placeholder="Nome do produto"
+                        aria-label="Pesquisar produto"
+                />
+                <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i> Buscar
+                </button>
+            </div>
+        </form>
+    </div>
+
 
 <!-- Tabela de produtos -->
 <div class="table-produtos">
@@ -106,6 +183,7 @@
         </tr>
         </thead>
         <tbody>
+
         <c:forEach var="produto" items="${Produtos}">
             <tr>
                 <td><c:out value="${produto.nome}" /></td>
@@ -117,6 +195,7 @@
                 </td>
             </tr>
         </c:forEach>
+
         </tbody>
     </table>
 </div>
